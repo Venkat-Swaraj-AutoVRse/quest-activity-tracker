@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quest Activity Tracker Web Companion - Monitor VR playtime, launch counts, and screen limits remotely.">
+    <title>Quest Activity Tracker - Web Companion</title>
+    <!-- Google Fonts Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glow-container">
+        <div class="glow-orb orb-purple"></div>
+        <div class="glow-orb orb-blue"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <span class="logo-icon">🪐</span>
+                <div class="logo-text">
+                    <h2>HORIZON</h2>
+                    <span>Activity Tracker</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <button class="nav-item active" id="nav-dashboard">
+                    <span class="nav-icon">📊</span> Dashboard
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="connection-status">
+                    <span class="status-indicator online"></span>
+                    <div class="status-details">
+                        <p class="status-label">Headset Server</p>
+                        <p class="status-value" id="server-address">Connecting...</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-title">
+                    <h1>Web Companion Dashboard</h1>
+                    <p>Real-time VR screen time stats and analytics</p>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="range-selector">
+                        <button class="btn-range active" id="range-today" data-range="today">Today</button>
+                        <button class="btn-range" id="range-week" data-range="week">Week</button>
+                        <button class="btn-range" id="range-month" data-range="month">Month</button>
+                    </div>
+                    <button class="btn-primary" id="btn-refresh">
+                        <span class="icon">🔄</span> Refresh
+                    </button>
+                </div>
+            </header>
+
+            <!-- Metrics Summary Cards -->
+            <section class="metrics-grid">
+                <div class="card metric-card">
+                    <div class="metric-icon color-cyan">⏱️</div>
+                    <div class="metric-info">
+                        <h3>Total Screen Time</h3>
+                        <p class="metric-value" id="val-total-time">0m 0s</p>
+                    </div>
+                </div>
+                
+                <div class="card metric-card">
+                    <div class="metric-icon color-magenta">📱</div>
+                    <div class="metric-info">
+                        <h3>Active Applications</h3>
+                        <p class="metric-value" id="val-active-apps">0 Apps</p>
+                    </div>
+                </div>
+
+                <div class="card metric-card">
+                    <div class="metric-icon color-purple">🚀</div>
+                    <div class="metric-info">
+                        <h3>Total Launches</h3>
+                        <p class="metric-value" id="val-total-launches">0 Launches</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Columns -->
+            <div class="content-columns">
+                <!-- Left: Chart & Exports -->
+                <div class="column-left">
+                    <section class="card chart-card">
+                        <div class="card-header">
+                            <h2>Time Distribution</h2>
+                            <span class="card-sub">Share of active usage</span>
+                        </div>
+                        <div class="chart-container">
+                            <div class="canvas-wrapper">
+                                <svg id="svg-chart" viewBox="0 0 200 200" width="100%" height="100%">
+                                    <circle cx="100" cy="100" r="70" fill="transparent" stroke="rgba(255,255,255,0.05)" stroke-width="20"></circle>
+                                </svg>
+                                <div class="chart-center-label">
+                                    <span class="label">Total</span>
+                                    <span class="value" id="chart-center-value">0m</span>
+                                </div>
+                            </div>
+                            <div class="chart-legend" id="chart-legend">
+                                <!-- Dynamic Legend -->
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="card export-card">
+                        <div class="card-header">
+                            <h2>Data Export</h2>
+                            <span class="card-sub">Download your activity records</span>
+                        </div>
+                        <div class="export-actions">
+                            <button class="btn-secondary" id="btn-export-csv">
+                                📥 Export to CSV
+                            </button>
+                            <button class="btn-secondary" id="btn-export-json">
+                                💾 Export to JSON
+                            </button>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right: Leaderboard -->
+                <div class="column-right">
+                    <section class="card leaderboard-card">
+                        <div class="card-header-search">
+                            <div class="title-area">
+                                <h2>Application Leaderboard</h2>
+                                <span class="card-sub">Ranked by active playtime</span>
+                            </div>
+                            <div class="search-box">
+                                <input type="text" id="search-input" placeholder="Search apps...">
+                                <span class="search-icon">🔍</span>
+                            </div>
+                        </div>
+
+                        <div class="leaderboard-list" id="leaderboard-list">
+                            <!-- Dynamic App Items -->
+                            <div class="loading-state">
+                                <div class="spinner"></div>
+                                <p>Loading stats from Quest headset...</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
