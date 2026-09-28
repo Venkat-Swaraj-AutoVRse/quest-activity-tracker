@@ -1,0 +1,77 @@
+name: Build & Release APK
+
+# Build the APK on every push to main and publish it to a GitHub Release
+# so users can download and sideload it.
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:   # allow manual runs from the Actions tab
+
+# Allow the workflow to create releases / upload assets
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      # gradle.properties hardcodes a Windows JDK path (org.gradle.java.home)
+      # that does not exist on the Linux runner. Remove that line so Gradle
+      # falls back to JAVA_HOME (the JDK 21 set up above).
+      - name: Neutralize hardcoded JDK path
+        run: sed -i '/^org\.gradle\.java\.home/d' gradle.properties
+
+      - name: Build debug APK
+        run: ./gradlew assembleDebug --no-daemon
+
+      # Derive a version tag: v<versionName>-<run_number> for uniqueness.
+      - name: Compute version tag
+        id: version
+        run: |
+          VERSION_NAME=$(grep -oP 'versionName\s*=\s*"\K[^"]+' app/build.gradle.kts | head -n1)
+          echo "tag=v${VERSION_NAME}-${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+          echo "name=Quest Activity Tracker v${VERSION_NAME} (build ${{ github.run_number }})" >> "$GITHUB_OUTPUT"
+
+      - name: Rename APK
+        run: |
+          mkdir -p dist
+          cp app/build/outputs/apk/debug/app-debug.apk \
+             "dist/quest-activity-tracker-${{ steps.version.outputs.tag }}.apk"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: ${{ steps.version.outputs.name }}
+          body: |
+            Automated build from commit ${{ github.sha }}.
+
+            **Install (sideload) instructions:**
+            1. Download the `.apk` below.
+            2. Connect your Meta Quest with Developer Mode enabled.
+            3. `adb install -r quest-activity-tracker-*.apk`
+            4. Grant usage-stats access (resets on reinstall):
+               `adb shell appops set com.autovrse.quest.activitytracker android:get_usage_stats allow`
+            5. Launch from **Library → Unknown Sources**.
+          files: dist/*.apk
+          generate_release_notes: true
