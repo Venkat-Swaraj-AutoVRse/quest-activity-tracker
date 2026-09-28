@@ -28,11 +28,22 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+          cache: gradle
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
         with:
           packages: ''   # don't pre-install packages here; done explicitly below
+
+      - name: Cache Android SDK packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.ANDROID_SDK_ROOT }}/platforms
+            ${{ env.ANDROID_SDK_ROOT }}/build-tools
+            ${{ env.ANDROID_SDK_ROOT }}/platform-tools
+          key: android-sdk-${{ runner.os }}-platform34-buildtools3400
+          restore-keys: android-sdk-${{ runner.os }}-
 
       - name: Install required SDK packages
         run: |
