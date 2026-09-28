@@ -1,4 +1,4 @@
-package com.meta.quest.activitytracker.model
+package com.autovrse.quest.activitytracker.model
 
 import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
@@ -146,7 +146,7 @@ object UsageTrackerHelper {
             "com.facebook.horizon",
             "com.facebook.spatial_persistence_service",
             "com.facebook.wearable.",
-            "com.meta.quest.activitytracker",
+            "com.autovrse.quest.activitytracker",
             "com.meta.systemui",
             "com.meta.pclinkservice",
             "com.meta.automation.",

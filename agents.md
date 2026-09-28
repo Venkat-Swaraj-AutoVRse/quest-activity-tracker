@@ -42,7 +42,7 @@ In [UsageServerService.kt](app/src/main/java/com/meta/quest/activitytracker/serv
   - `com.oculus.*` (Oculus Shell, SystemUX, Browser, Store, AlertService, Metacam, etc.)
   - `com.android.*` & `android.*` (Android core services)
   - `horizon.*` & `horizonos.*` (Horizon OS platform services)
-  - `com.meta.quest.activitytracker` (self-exclusion)
+  - `com.autovrse.quest.activitytracker` (self-exclusion)
   - Background Meta diagnostic & testing services (`com.meta.systemui`, `com.meta.pclinkservice`, `com.meta.automation.*`, etc.)
 
 ---
@@ -60,11 +60,11 @@ Since the application queries `UsageStatsManager`, it requires restricted permis
    ```
 3. **Grant Appops Permission** (Critical - permission resets on reinstall):
    ```powershell
-   adb shell appops set com.meta.quest.activitytracker android:get_usage_stats allow
+   adb shell appops set com.autovrse.quest.activitytracker android:get_usage_stats allow
    ```
 4. **Launch Application**:
    ```powershell
-   adb shell am start -n com.meta.quest.activitytracker/.MainActivity
+   adb shell am start -n com.autovrse.quest.activitytracker/.MainActivity
    ```
 
 ### 5. Web Companion Access Workflows

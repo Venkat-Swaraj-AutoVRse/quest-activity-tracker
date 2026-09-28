@@ -1,4 +1,4 @@
-package com.meta.quest.activitytracker.model
+package com.autovrse.quest.activitytracker.model
 
 import androidx.compose.ui.graphics.ImageBitmap
 

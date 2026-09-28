@@ -1,4 +1,4 @@
-package com.meta.quest.activitytracker
+package com.autovrse.quest.activitytracker
 
 import android.app.AppOpsManager
 import android.content.Context
@@ -8,7 +8,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.*
-import com.meta.quest.activitytracker.ui.MainAppScreen
+import com.autovrse.quest.activitytracker.ui.MainAppScreen
 
 class MainActivity : ComponentActivity() {
 

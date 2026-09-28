@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.meta.quest.activitytracker"
+    namespace = "com.autovrse.quest.activitytracker"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.meta.quest.activitytracker"
+        applicationId = "com.autovrse.quest.activitytracker"
         minSdk = 29
         targetSdk = 34
         versionCode = 1
@@ -39,7 +39,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
 
     packaging {

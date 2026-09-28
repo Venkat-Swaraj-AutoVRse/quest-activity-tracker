@@ -35,11 +35,26 @@
             android:name="com.oculus.vr.focusaware"
             android:value="true" />
 
+        <!-- Allow the user to freely resize the panel -->
+        <meta-data
+            android:name="com.oculus.vrshell.supports_free_resizing"
+            android:value="true" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:resizeableActivity="true"
+            android:screenOrientation="landscape"
             android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|density">
+
+            <!-- Default 2D panel dimensions on Horizon OS (landscape 1024x640dp) -->
+            <layout
+                android:defaultWidth="1024dp"
+                android:defaultHeight="640dp"
+                android:minWidth="800dp"
+                android:minHeight="500dp"
+                android:gravity="center" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

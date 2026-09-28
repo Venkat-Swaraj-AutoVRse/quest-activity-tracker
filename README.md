@@ -85,13 +85,13 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 ### 3. Grant Screen Time Permission
 Since `UsageStatsManager` accesses sensitive activity logs, Horizon OS requires manual granting of the permission via ADB (re-installing the app resets this setting):
 ```powershell
-adb shell appops set com.meta.quest.activitytracker android:get_usage_stats allow
+adb shell appops set com.autovrse.quest.activitytracker android:get_usage_stats allow
 ```
 
 ### 4. Launch the App
 Run the activity tracker from your Quest UI under **Library -> Unknown Sources**, or execute the following ADB start command:
 ```powershell
-adb shell am start -n com.meta.quest.activitytracker/.MainActivity
+adb shell am start -n com.autovrse.quest.activitytracker/.MainActivity
 ```
 
 ---

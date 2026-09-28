@@ -1,4 +1,4 @@
-package com.meta.quest.activitytracker.ui
+package com.autovrse.quest.activitytracker.ui
 
 import android.content.Context
 import android.content.Intent
@@ -31,10 +31,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.meta.quest.activitytracker.model.AppUsageInfo
-import com.meta.quest.activitytracker.model.TimeRange
-import com.meta.quest.activitytracker.model.UsageTrackerHelper
-import com.meta.quest.activitytracker.service.UsageServerService
+import com.autovrse.quest.activitytracker.model.AppUsageInfo
+import com.autovrse.quest.activitytracker.model.TimeRange
+import com.autovrse.quest.activitytracker.model.UsageTrackerHelper
+import com.autovrse.quest.activitytracker.service.UsageServerService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -500,8 +500,6 @@ fun UsageDistributionChart(usageStats: List<AppUsageInfo>) {
         // Circular ring chart drawn via canvas
         Canvas(modifier = Modifier.size(160.dp)) {
             val strokeWidth = 18.dp.toPx()
-            val size = this.size
-            val radius = (size.width - strokeWidth) / 2
 
             var startAngle = -90f
 
@@ -941,7 +939,7 @@ fun PermissionOnboarding(onCheckPermission: () -> Unit) {
                             .padding(12.dp)
                     ) {
                         Text(
-                            text = "adb shell pm grant com.meta.quest.activitytracker android.permission.PACKAGE_USAGE_STATS",
+                            text = "adb shell pm grant com.autovrse.quest.activitytracker android.permission.PACKAGE_USAGE_STATS",
                             color = AccentCyan,
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,

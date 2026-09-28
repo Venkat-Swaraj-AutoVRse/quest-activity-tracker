@@ -1,4 +1,4 @@
-package com.meta.quest.activitytracker.service
+package com.autovrse.quest.activitytracker.service
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -11,8 +11,8 @@ import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.meta.quest.activitytracker.model.TimeRange
-import com.meta.quest.activitytracker.model.UsageTrackerHelper
+import com.autovrse.quest.activitytracker.model.TimeRange
+import com.autovrse.quest.activitytracker.model.UsageTrackerHelper
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.gson.gson
