@@ -45,13 +45,13 @@ jobs:
       - name: Build debug APK
         run: ./gradlew assembleDebug --no-daemon
 
-      # Derive a version tag: v<versionName>-<run_number> for uniqueness.
+      # Derive a clean semver tag: v<versionName> (e.g. v1.0.1).
       - name: Compute version tag
         id: version
         run: |
           VERSION_NAME=$(grep -oP 'versionName\s*=\s*"\K[^"]+' app/build.gradle.kts | head -n1)
-          echo "tag=v${VERSION_NAME}-${{ github.run_number }}" >> "$GITHUB_OUTPUT"
-          echo "name=Quest Activity Tracker v${VERSION_NAME} (build ${{ github.run_number }})" >> "$GITHUB_OUTPUT"
+          echo "tag=v${VERSION_NAME}" >> "$GITHUB_OUTPUT"
+          echo "name=Quest Activity Tracker v${VERSION_NAME}" >> "$GITHUB_OUTPUT"
 
       - name: Rename APK
         run: |
