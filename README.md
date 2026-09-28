@@ -125,3 +125,9 @@ This automatically establishes port forwarding (local `8080` -> Quest `8080`) an
 The Web Companion dashboard features two export utilities at the bottom-left panel:
 - 📥 **Export to CSV**: Downloads a spreadsheet containing application name, package name, total foreground time (in seconds), launch counts, and last active timestamp.
 - 💾 **Export to JSON**: Downloads a structured raw JSON array containing the raw database response for custom scripts and analysis.
+
+---
+
+## 🤖 Built With
+
+This project was built using agentic VR/MR development skills from **[Meta Quest Agentic Tools](https://github.com/meta-quest/agentic-tools)** and the **Meta VR CLI (`hzdb`)**.
