@@ -1,11 +1,10 @@
 name: Build & Release APK
 
-# Build the APK on every push to main and publish it to a GitHub Release
-# so users can download and sideload it.
+# Build the APK and publish it to a GitHub Release so users can download and
+# sideload it. Runs manually only — trigger it from the Actions tab
+# ("Build & Release APK" -> "Run workflow").
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:   # allow manual runs from the Actions tab
+  workflow_dispatch:   # manual runs only
 
 # Allow the workflow to create releases / upload assets
 permissions:
@@ -42,12 +41,6 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
-
-      # gradle.properties hardcodes a Windows JDK path (org.gradle.java.home)
-      # that does not exist on the Linux runner. Remove that line so Gradle
-      # falls back to JAVA_HOME (the JDK 21 set up above).
-      - name: Neutralize hardcoded JDK path
-        run: sed -i '/^org\.gradle\.java\.home/d' gradle.properties
 
       - name: Build debug APK
         run: ./gradlew assembleDebug --no-daemon
